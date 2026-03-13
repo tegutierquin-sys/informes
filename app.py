@@ -471,7 +471,7 @@ div[data-testid="stAlert"] {
 """, unsafe_allow_html=True)
 
 # ── Cargar configuración ──────────────────────────────────────
-@st.cache_data
+@st.cache_data(ttl=0)
 def cargar_config():
     with open("config.yaml", "r", encoding="utf-8") as f:
         return yaml.safe_load(f)
@@ -654,7 +654,6 @@ elif st.session_state.vista == "detalle":
         if tiene_url:
             botones_html = (
                 '<a href="' + url + '" target="_blank" class="btn-acceder">Ver documento ↗</a>'
-                '<a href="' + url + '&download=1" target="_blank" class="btn-descargar">⬇ Descargar</a>'
             )
         else:
             botones_html = '<span class="badge-proximamente">🔒 Próximamente</span>'
@@ -665,6 +664,11 @@ elif st.session_state.vista == "detalle":
         )
         extras_row = '<div class="extra-links-row">' + extras_html + '</div>' if extras_html else ''
 
+        extra_section = (
+            '<div class="extra-links-row" style="margin-top:12px;border-top:1px solid #eee;padding-top:12px">'
+            + extras_html + '</div>'
+        ) if extras_html else ''
+
         card_html = (
             '<div class="edicion-card">'
             '<div class="edicion-card-left">'
@@ -674,8 +678,9 @@ elif st.session_state.vista == "detalle":
             '<div class="edicion-info-fecha">Publicado en ' + fecha_ed + '</div>'
             '</div>'
             '</div>'
-            '<div>' + botones_html + extras_row + '</div>'
+            '<div>' + botones_html + '</div>'
             '</div>'
+            + extra_section
         )
         st.markdown(card_html, unsafe_allow_html=True)
 
