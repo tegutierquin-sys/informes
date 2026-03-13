@@ -58,15 +58,26 @@ st.markdown("""
 
 /* ── CABECERA PORTAL ── */
 .portal-header {
-    background: #0d1b2a;
-    padding: 28px 60px;
+    background: linear-gradient(160deg, #003366 0%, #005A9C 60%, #F2C811 100%);
+    padding: 20px 48px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    border-bottom: 2px solid #005aa0;
+    border-bottom: 3px solid #F2C811;
 }
 
 .portal-header-left {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.portal-header-logo img {
+    height: 48px;
+    display: block;
+}
+
+.portal-header-text {
     display: flex;
     flex-direction: column;
 }
@@ -74,24 +85,24 @@ st.markdown("""
 .portal-ministerio-label {
     font-family: 'Syne', sans-serif;
     font-size: 9px;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
     text-transform: uppercase;
-    color: rgba(255,255,255,0.4);
-    margin-bottom: 4px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 2px;
 }
 
 .portal-titulo {
     font-family: 'Syne', sans-serif;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 700;
     color: #ffffff;
 }
 
 .portal-subtitulo {
-    font-size: 12px;
-    color: rgba(255,255,255,0.4);
+    font-size: 11px;
+    color: rgba(255,255,255,0.6);
     font-weight: 300;
-    margin-top: 2px;
+    margin-top: 1px;
 }
 
 /* ── CONTENIDO PRINCIPAL ── */
@@ -114,8 +125,8 @@ st.markdown("""
 /* ── TARJETAS DE MONOGRÁFICO ── */
 .card-mono {
     background: #ffffff;
-    border-radius: 20px;
-    padding: 32px 28px;
+    border-radius: 16px;
+    padding: 20px 20px;
     border: 1px solid #e8e4df;
     transition: all 0.3s ease;
     height: 100%;
@@ -139,24 +150,24 @@ st.markdown("""
 }
 
 .card-icono {
-    font-size: 40px;
-    margin-bottom: 16px;
+    font-size: 28px;
+    margin-bottom: 10px;
     display: block;
 }
 
 .card-titulo {
     font-family: 'Syne', sans-serif;
-    font-size: 18px;
+    font-size: 15px;
     font-weight: 700;
     color: #0d1b2a;
-    margin-bottom: 10px;
+    margin-bottom: 6px;
 }
 
 .card-desc {
-    font-size: 13px;
+    font-size: 11px;
     color: #777;
-    line-height: 1.6;
-    margin-bottom: 20px;
+    line-height: 1.5;
+    margin-bottom: 12px;
     font-weight: 300;
 }
 
@@ -357,14 +368,17 @@ div[data-testid="stTextInput"] input {
     background: rgba(255,255,255,0.07) !important;
     border: 1px solid rgba(255,255,255,0.15) !important;
     border-radius: 10px !important;
-    color: white !important;
+    color: #000000 !important;
+    -webkit-text-security: disc !important;
     font-family: 'Inter', sans-serif !important;
     padding: 14px 18px !important;
     font-size: 14px !important;
+    caret-color: #000000 !important;
 }
 
 div[data-testid="stTextInput"] input::placeholder {
-    color: rgba(255,255,255,0.2) !important;
+    color: rgba(0,0,0,0.3) !important;
+    -webkit-text-security: none !important;
 }
 
 div[data-testid="stTextInput"] label {
@@ -472,19 +486,24 @@ if st.session_state.vista == "catalogo":
     # Cabecera
     col_h1, col_h2 = st.columns([4, 1])
     with col_h1:
-        st.markdown("""
+        st.markdown(f"""
         <div class="portal-header">
             <div class="portal-header-left">
-                <div class="portal-ministerio-label">Ministerio para la Transformación Digital y de la Función Pública</div>
-                <div class="portal-titulo">Biblioteca de Monográficos</div>
-                <div class="portal-subtitulo">Subdirección General de Análisis de Mercado y Evolución Tecnológica</div>
+                <div class="portal-header-logo">
+                    <img src="data:image/png;base64,{LOGO_B64}" />
+                </div>
+                <div class="portal-header-text">
+                    <div class="portal-ministerio-label">Ministerio para la Transformación Digital y de la Función Pública</div>
+                    <div class="portal-titulo">Biblioteca de Monográficos</div>
+                    <div class="portal-subtitulo">Subdirección General de Análisis de Mercado y Evolución Tecnológica</div>
+                </div>
             </div>
         </div>
         """, unsafe_allow_html=True)
 
     # Botón cerrar sesión
     with col_h2:
-        st.markdown("<div style='padding-top:36px'>", unsafe_allow_html=True)
+        st.markdown("<div style='padding-top:28px'>", unsafe_allow_html=True)
         if st.button("🔒 Cerrar sesión"):
             st.session_state.autenticado = False
             st.rerun()
