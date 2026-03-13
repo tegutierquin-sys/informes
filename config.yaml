@@ -23,11 +23,11 @@ monograficos:
     descripcion: "Mercado de infraestructuras pasivas de telecomunicaciones: empresas torreras, concentración, regulación y tendencias."
     ediciones:
       - nombre: "1ª Edición"
-        fecha: "2023"
-        sharepoint_url: ""
+        fecha: "2025"
+        sharepoint_url: "https://colaboraage.sharepoint.com/:p:/s/SGAMET-Teams/IQC9LqWujh_eQbwovNy-BsnpAYewe2cuBilDoBKKlCEP0jA?e=gT5UO6"
       - nombre: "2ª Edición"
         fecha: "2025"
-        sharepoint_url: "https://TUNOMBRE.sharepoint.com/:b:/s/TUSITE/ENLACE_ED2"
+        sharepoint_url: "https://colaboraage.sharepoint.com/:p:/s/SGAMET-Teams/IQAt9QPf5YAbR7534zaWvL3MAQMkv8TuiWNc-dmFDowrpXk?e=4Xhtnu"
         extra_links:
           - etiqueta: "📊 Dashboard interactivo · TowerCos"
             url: "https://towercos-analisis-datos.netlify.app/"
