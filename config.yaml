@@ -23,11 +23,14 @@ monograficos:
     descripcion: "Mercado de infraestructuras pasivas de telecomunicaciones: empresas torreras, concentración, regulación y tendencias."
     ediciones:
       - nombre: "1ª Edición"
-        fecha: "2025"
-        sharepoint_url: "https://colaboraage.sharepoint.com/:p:/s/SGAMET-Teams/IQC9LqWujh_eQbwovNy-BsnpASnaK1g2YzBgll7J6sOf6y4?e=RdXypN"
+        fecha: "2023"
+        sharepoint_url: ""
       - nombre: "2ª Edición"
-        fecha: "2026"
-        sharepoint_url: "https://colaboraage.sharepoint.com/:p:/s/SGAMET-Teams/IQAt9QPf5YAbR7534zaWvL3MAQMkv8TuiWNc-dmFDowrpXk?e=0I8Eiz"
+        fecha: "2025"
+        sharepoint_url: "https://TUNOMBRE.sharepoint.com/:b:/s/TUSITE/ENLACE_ED2"
+        extra_links:
+          - etiqueta: "📊 Dashboard interactivo · TowerCos"
+            url: "https://towercos-analisis-datos.netlify.app/"
 
   - titulo: "Fibercos"
     icono: "🛸"
@@ -47,6 +50,7 @@ monograficos:
         fecha: "2025"
         sharepoint_url: ""
 
+
 # ─────────────────────────────────────────────────────────────
 # CÓMO AÑADIR UN NUEVO MONOGRÁFICO:
 # 1. Copia el bloque de arriba (desde "- titulo:" hasta el último sharepoint_url)
@@ -60,4 +64,7 @@ monograficos:
 #      - nombre: "3ª Edición"
 #        fecha: "2026"
 #        sharepoint_url: "https://..."
+#        extra_links:                          ← opcional
+#          - etiqueta: "📊 Dashboard"
+#            url: "https://..."
 # ─────────────────────────────────────────────────────────────

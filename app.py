@@ -314,20 +314,21 @@ st.markdown("""
 
 .btn-acceder {
     display: inline-block;
-    background: #0d1b2a;
-    color: white;
+    background: #ffffff;
+    color: #003366 !important;
+    border: 2px solid #003366;
     border-radius: 10px;
     padding: 10px 20px;
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 700;
     text-decoration: none;
     letter-spacing: 0.5px;
-    transition: background 0.2s;
+    transition: all 0.2s;
 }
 
 .btn-acceder:hover {
-    background: #005aa0;
-    color: white;
+    background: #003366;
+    color: white !important;
     text-decoration: none;
 }
 
@@ -362,6 +363,33 @@ st.markdown("""
     font-weight: 500;
     color: #aaa;
     letter-spacing: 0.5px;
+}
+
+.extra-links-row {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.btn-extra {
+    display: inline-block;
+    background: #fff8e1;
+    color: #7a5500 !important;
+    border: 1px solid #F2C811;
+    border-radius: 10px;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    text-decoration: none;
+    letter-spacing: 0.3px;
+    transition: all 0.2s;
+}
+
+.btn-extra:hover {
+    background: #F2C811;
+    color: #003366 !important;
+    text-decoration: none;
 }
 
 /* Streamlit input override */
@@ -619,6 +647,7 @@ elif st.session_state.vista == "detalle":
 
         tiene_url = bool(ed.get('sharepoint_url', '').strip())
         url = ed.get('sharepoint_url', '')
+        extra_links = ed.get('extra_links', [])
 
         if tiene_url:
             botones_html = (
@@ -628,8 +657,15 @@ elif st.session_state.vista == "detalle":
         else:
             botones_html = '<span class="badge-proximamente">🔒 Próximamente</span>'
 
+        # Extra links como subapartados
+        extras_html = ''
+        for ex in extra_links:
+            extras_html += f'<a href="{ex["url"]}" target="_blank" class="btn-extra">{ex["etiqueta"]}</a>'
+
         nombre_ed = ed['nombre']
         fecha_ed = ed['fecha']
+        extras_row = f'<div class="extra-links-row">{extras_html}</div>' if extras_html else ''
+
         st.markdown(f"""
         <div class="edicion-card">
             <div class="edicion-card-left">
@@ -641,6 +677,7 @@ elif st.session_state.vista == "detalle":
             </div>
             <div>
                 {botones_html}
+                {extras_row}
             </div>
         </div>
         """, unsafe_allow_html=True)
