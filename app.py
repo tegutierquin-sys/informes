@@ -107,7 +107,7 @@ st.markdown("""
 
 /* ── CONTENIDO PRINCIPAL ── */
 .portal-body {
-    padding: 32px 60px 48px 60px;
+    padding: 32px 60px 48px 80px;
 }
 
 .seccion-titulo {
@@ -117,7 +117,7 @@ st.markdown("""
     letter-spacing: 2px;
     text-transform: uppercase;
     color: #666;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
     padding-bottom: 12px;
     border-bottom: 1px solid #ddd;
 }
@@ -253,7 +253,7 @@ st.markdown("""
 }
 
 .detalle-body {
-    padding: 32px 60px 48px 60px;
+    padding: 32px 60px 48px 80px;
 }
 
 .edicion-card {
@@ -505,10 +505,16 @@ if not st.session_state.autenticado:
     div[data-testid="stTextInput"] input {
         padding: 6px 12px !important;
         font-size: 13px !important;
-        height: 38px !important;
+        height: 36px !important;
+        min-height: 36px !important;
     }
     div[data-baseweb="input"] {
-        max-width: 100% !important;
+        min-height: 36px !important;
+        height: 36px !important;
+    }
+    div[data-baseweb="base-input"] {
+        min-height: 36px !important;
+        height: 36px !important;
     }
     </style>
     """, unsafe_allow_html=True)
