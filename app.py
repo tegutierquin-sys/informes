@@ -28,6 +28,7 @@ st.markdown("""
 /* Ocultar elementos de Streamlit */
 #MainMenu, footer, header { visibility: hidden; }
 .block-container { padding: 0 !important; max-width: 100% !important; }
+section.main > div { padding-left: 0 !important; padding-right: 0 !important; }
 
 /* ── LOGIN: fondo degradado institucional ── */
 .tarjeta-login {
@@ -531,7 +532,7 @@ if not st.session_state.autenticado:
         </div>
     """, unsafe_allow_html=True)
 
-    col1, col2, col3 = st.columns([1, 2, 1])
+    col1, col2, col3 = st.columns([1.5, 1, 1.5])
     with col2:
         clave = st.text_input("Clave", type="password",
                               label_visibility="collapsed",
@@ -576,7 +577,7 @@ if st.session_state.vista == "catalogo":
     st.markdown('</div>', unsafe_allow_html=True)
 
     # Cuerpo
-    st.markdown('<div class="portal-body">', unsafe_allow_html=True)
+    st.markdown('<div class="portal-body" style="padding-left:80px">', unsafe_allow_html=True)
     st.markdown('<div class="seccion-titulo">Monográficos disponibles</div>', unsafe_allow_html=True)
 
     # Grid de tarjetas
@@ -649,7 +650,7 @@ elif st.session_state.vista == "detalle":
             st.rerun()
 
     # Ediciones
-    st.markdown('<div class="detalle-body">', unsafe_allow_html=True)
+    st.markdown('<div class="detalle-body" style="padding-left:80px">', unsafe_allow_html=True)
     st.markdown('<div class="seccion-titulo">Ediciones disponibles</div>', unsafe_allow_html=True)
 
     total = len(mono["ediciones"])
