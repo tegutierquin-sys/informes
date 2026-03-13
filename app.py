@@ -648,38 +648,35 @@ elif st.session_state.vista == "detalle":
         tiene_url = bool(ed.get('sharepoint_url', '').strip())
         url = ed.get('sharepoint_url', '')
         extra_links = ed.get('extra_links', [])
+        nombre_ed = ed['nombre']
+        fecha_ed = ed['fecha']
 
         if tiene_url:
             botones_html = (
-                f'<a href="{url}" target="_blank" class="btn-acceder">Ver documento ↗</a>'
-                f'<a href="{url}&download=1" target="_blank" class="btn-descargar">⬇ Descargar</a>'
+                '<a href="' + url + '" target="_blank" class="btn-acceder">Ver documento ↗</a>'
+                '<a href="' + url + '&download=1" target="_blank" class="btn-descargar">⬇ Descargar</a>'
             )
         else:
             botones_html = '<span class="badge-proximamente">🔒 Próximamente</span>'
 
-        # Extra links como subapartados
-        extras_html = ''
-        for ex in extra_links:
-            extras_html += f'<a href="{ex["url"]}" target="_blank" class="btn-extra">{ex["etiqueta"]}</a>'
+        extras_html = ''.join(
+            '<a href="' + ex["url"] + '" target="_blank" class="btn-extra">' + ex["etiqueta"] + '</a>'
+            for ex in extra_links
+        )
+        extras_row = '<div class="extra-links-row">' + extras_html + '</div>' if extras_html else ''
 
-        nombre_ed = ed['nombre']
-        fecha_ed = ed['fecha']
-        extras_row = f'<div class="extra-links-row">{extras_html}</div>' if extras_html else ''
-
-        st.markdown(f"""
-        <div class="edicion-card">
-            <div class="edicion-card-left">
-                <div class="edicion-numero">0{num_real}</div>
-                <div>
-                    <div class="edicion-info-nombre">{nombre_ed} {latest_badge}</div>
-                    <div class="edicion-info-fecha">Publicado en {fecha_ed}</div>
-                </div>
-            </div>
-            <div>
-                {botones_html}
-                {extras_row}
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        card_html = (
+            '<div class="edicion-card">'
+            '<div class="edicion-card-left">'
+            '<div class="edicion-numero">0' + str(num_real) + '</div>'
+            '<div>'
+            '<div class="edicion-info-nombre">' + nombre_ed + ' ' + latest_badge + '</div>'
+            '<div class="edicion-info-fecha">Publicado en ' + fecha_ed + '</div>'
+            '</div>'
+            '</div>'
+            '<div>' + botones_html + extras_row + '</div>'
+            '</div>'
+        )
+        st.markdown(card_html, unsafe_allow_html=True)
 
     st.markdown('</div>', unsafe_allow_html=True)
