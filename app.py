@@ -107,7 +107,7 @@ st.markdown("""
 
 /* ── CONTENIDO PRINCIPAL ── */
 .portal-body {
-    padding: 48px 60px;
+    padding: 32px 60px 48px 60px;
 }
 
 .seccion-titulo {
@@ -253,15 +253,15 @@ st.markdown("""
 }
 
 .detalle-body {
-    padding: 48px 60px;
+    padding: 32px 60px 48px 60px;
 }
 
 .edicion-card {
     background: white;
     border-radius: 16px;
-    padding: 28px 32px;
+    padding: 20px 32px;
     border: 1px solid #e8e4df;
-    margin-bottom: 16px;
+    margin-bottom: 0px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -502,6 +502,14 @@ if not st.session_state.autenticado:
         font-weight: 600 !important; padding: 10px !important; width: 100%;
     }
     .stButton > button:hover { background-color: #005A9C !important; }
+    div[data-testid="stTextInput"] input {
+        padding: 6px 12px !important;
+        font-size: 13px !important;
+        height: 38px !important;
+    }
+    div[data-baseweb="input"] {
+        max-width: 100% !important;
+    }
     </style>
     """, unsafe_allow_html=True)
 
@@ -665,12 +673,12 @@ elif st.session_state.vista == "detalle":
         extras_row = '<div class="extra-links-row">' + extras_html + '</div>' if extras_html else ''
 
         extra_section = (
-            '<div class="extra-links-row" style="margin-top:12px;border-top:1px solid #eee;padding-top:12px">'
+            '<div class="extra-links-row" style="margin-top:10px;padding-top:10px;border-top:1px solid #eee;width:100%">'
             + extras_html + '</div>'
         ) if extras_html else ''
 
         card_html = (
-            '<div class="edicion-card">'
+            '<div class="edicion-card" style="flex-wrap:wrap;">'
             '<div class="edicion-card-left">'
             '<div class="edicion-numero">0' + str(num_real) + '</div>'
             '<div>'
@@ -679,8 +687,8 @@ elif st.session_state.vista == "detalle":
             '</div>'
             '</div>'
             '<div>' + botones_html + '</div>'
+            + extra_section +
             '</div>'
-            + extra_section
         )
         st.markdown(card_html, unsafe_allow_html=True)
 
