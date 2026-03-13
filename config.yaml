@@ -5,8 +5,8 @@ monograficos:
     descripcion: "Análisis del mercado satelital: operadores, cobertura, tecnologías LEO/GEO y evolución del sector en España y Europa."
     ediciones:
       - nombre: "1ª Edición"
-        fecha: "2024"
-        sharepoint_url: ""
+        fecha: "2025"
+        sharepoint_url: "https://colaboraage.sharepoint.com/:p:/s/SGAMET-Teams/IQCINKiIJC7IQJj_PMQo6yxvAUma3ofnYYxfJjdUGqfUq6E?e=zo8QdK"
 
   - titulo: "Cable Submarino"
     icono: "🌊"
@@ -14,11 +14,11 @@ monograficos:
     descripcion: "Infraestructuras de cable submarino: rutas, operadores, capacidad y relevancia estratégica para la conectividad global."
     ediciones:
       - nombre: "1ª Edición"
-        fecha: "2024"
-        sharepoint_url: ""
+        fecha: "2026"
+        sharepoint_url: "https://colaboraage.sharepoint.com/:p:/s/SGAMET-Teams/IQCIb3tTf48jSK4KcVetud-EAfduiNmSec3ohNJlOYwdm7o?e=khMWE7"
 
   - titulo: "Torreros"
-    icono: "📶"
+    icono: "🗼"
     color: "#2d5016"
     descripcion: "Mercado de infraestructuras pasivas de telecomunicaciones: empresas torreras, concentración, regulación y tendencias."
     ediciones:
@@ -33,13 +33,13 @@ monograficos:
             url: "https://towercos-analisis-datos.netlify.app/"
 
   - titulo: "Fibercos"
-    icono: "🛸"
+    icono: "📶"
     color: "#4a1a6e"
     descripcion: "Empresas de fibra óptica mayorista: modelos de negocio, inversión, despliegue y competencia en el mercado español."
     ediciones:
       - nombre: "1ª Edición"
-        fecha: "2024"
-        sharepoint_url: ""
+        fecha: "2025"
+        sharepoint_url: "https://colaboraage.sharepoint.com/:p:/s/SGAMET-Teams/IQAwl7gO3tnDRI4DljbBIu46AZxPWxeQy1FC27Fi-NCytic?e=jCN7eD"
 
   - titulo: "Inteligencia Artificial"
     icono: "🤖"

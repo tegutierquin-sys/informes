@@ -442,6 +442,82 @@ div[data-testid="stButton"] button:hover {
     background: #004080 !important;
 }
 
+/* ── FOOTER INSTITUCIONAL ── */
+.footer-institucional {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    border-top: 1px solid #e0e0e0;
+    padding: 8px 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    z-index: 9998;
+    gap: 16px;
+}
+
+.footer-bloque {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+}
+
+.footer-sep {
+    width: 1px;
+    height: 36px;
+    background: #ccc;
+    flex-shrink: 0;
+}
+
+.footer-texto {
+    font-size: 9px;
+    color: #444;
+    line-height: 1.3;
+    font-family: 'Inter', sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+.footer-texto strong {
+    display: block;
+    font-size: 10px;
+    color: #003366;
+}
+
+.footer-estrella {
+    color: #003399;
+    font-size: 18px;
+    letter-spacing: -2px;
+}
+
+.footer-eu-text {
+    font-size: 9px;
+    color: #333;
+    line-height: 1.4;
+}
+
+.footer-eu-text strong {
+    font-size: 10px;
+    color: #003399;
+    display: block;
+}
+
+.footer-prtr {
+    font-size: 9px;
+    color: #c0392b;
+    font-weight: 700;
+    line-height: 1.3;
+    text-transform: uppercase;
+}
+
+/* Espacio para que el footer no tape contenido */
+.stApp > div:last-child {
+    padding-bottom: 60px;
+}
+
 /* Botón cerrar sesión flotante */
 .cerrar-sesion-flotante {
     position: fixed;
@@ -477,6 +553,47 @@ div[data-testid="stAlert"] {
 </style>
 """, unsafe_allow_html=True)
 
+# ── Footer institucional (se muestra siempre) ──────────────────
+FOOTER_HTML = """
+<div class="footer-institucional">
+    <div class="footer-bloque">
+        <span style="font-size:20px">🇪🇸</span>
+        <div>
+            <div class="footer-texto"><strong>Gobierno de España</strong></div>
+            <div class="footer-texto" style="font-size:8px;color:#888">Agenda 2030</div>
+        </div>
+    </div>
+    <div class="footer-sep"></div>
+    <div class="footer-bloque">
+        <div class="footer-texto">
+            <strong>Ministerio para la Transformación Digital</strong>
+            y de la Función Pública
+        </div>
+    </div>
+    <div class="footer-sep"></div>
+    <div class="footer-bloque">
+        <div class="footer-texto">
+            <strong>Secretaría de Estado de Telecomunicaciones</strong>
+            e Infraestructuras Digitales
+        </div>
+    </div>
+    <div class="footer-sep"></div>
+    <div class="footer-bloque">
+        <div class="footer-estrella">★ ★ ★<br>★ ★ ★<br>★ ★ ★</div>
+        <div class="footer-eu-text">
+            <strong>Financiado por la<br>Unión Europea</strong>
+            NextGenerationEU
+        </div>
+    </div>
+    <div class="footer-sep"></div>
+    <div class="footer-bloque">
+        <div style="background:#c0392b;color:white;font-weight:700;font-size:8px;padding:4px 8px;border-radius:3px;line-height:1.4;text-align:center">
+            Plan de Recuperación,<br>Transformación y Resiliencia
+        </div>
+    </div>
+</div>
+"""
+
 # ── Cargar configuración ──────────────────────────────────────
 @st.cache_data(ttl=0)
 def cargar_config():
@@ -485,6 +602,9 @@ def cargar_config():
 
 config = cargar_config()
 monograficos = config["monograficos"]
+
+# ── Mostrar footer siempre ───────────────────────────────────
+st.markdown(FOOTER_HTML, unsafe_allow_html=True)
 
 # ── Estado de sesión ──────────────────────────────────────────
 if "autenticado" not in st.session_state:
