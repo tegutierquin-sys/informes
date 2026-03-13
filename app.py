@@ -201,10 +201,11 @@ st.markdown("""
 
 /* ── DETALLE MONOGRÁFICO ── */
 .detalle-header {
-    background: #0d1b2a;
-    padding: 40px 60px;
+    background: linear-gradient(160deg, #003366 0%, #005A9C 60%, #F2C811 100%);
+    padding: 28px 48px;
     position: relative;
     overflow: hidden;
+    border-bottom: 3px solid #F2C811;
 }
 
 .detalle-header::after {
@@ -406,6 +407,32 @@ div[data-testid="stButton"] button:hover {
     background: #004080 !important;
 }
 
+/* Botón cerrar sesión flotante */
+.cerrar-sesion-flotante {
+    position: fixed;
+    top: 16px;
+    right: 24px;
+    z-index: 9999;
+}
+
+.btn-cerrar {
+    background: rgba(255,255,255,0.15);
+    color: white !important;
+    border: 1px solid rgba(255,255,255,0.3);
+    border-radius: 8px;
+    padding: 8px 16px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    backdrop-filter: blur(10px);
+    letter-spacing: 0.5px;
+}
+
+.btn-cerrar:hover {
+    background: rgba(255,255,255,0.25);
+}
+
 div[data-testid="stAlert"] {
     background: rgba(220,50,50,0.15) !important;
     border: 1px solid rgba(220,50,50,0.3) !important;
@@ -484,30 +511,27 @@ if not st.session_state.autenticado:
 if st.session_state.vista == "catalogo":
 
     # Cabecera
-    col_h1, col_h2 = st.columns([4, 1])
-    with col_h1:
-        st.markdown(f"""
-        <div class="portal-header">
-            <div class="portal-header-left">
-                <div class="portal-header-logo">
-                    <img src="data:image/png;base64,{LOGO_B64}" />
-                </div>
-                <div class="portal-header-text">
-                    <div class="portal-ministerio-label">Ministerio para la Transformación Digital y de la Función Pública</div>
-                    <div class="portal-titulo">Biblioteca de Monográficos</div>
-                    <div class="portal-subtitulo">Subdirección General de Análisis de Mercado y Evolución Tecnológica</div>
-                </div>
+    st.markdown(f"""
+    <div class="portal-header">
+        <div class="portal-header-left">
+            <div class="portal-header-logo">
+                <img src="data:image/png;base64,{LOGO_B64}" />
+            </div>
+            <div class="portal-header-text">
+                <div class="portal-ministerio-label">Ministerio para la Transformación Digital y de la Función Pública</div>
+                <div class="portal-titulo">Biblioteca de Monográficos</div>
+                <div class="portal-subtitulo">Subdirección General de Análisis de Mercado y Evolución Tecnológica</div>
             </div>
         </div>
-        """, unsafe_allow_html=True)
+    </div>
+    """, unsafe_allow_html=True)
 
-    # Botón cerrar sesión
-    with col_h2:
-        st.markdown("<div style='padding-top:28px'>", unsafe_allow_html=True)
-        if st.button("🔒 Cerrar sesión"):
-            st.session_state.autenticado = False
-            st.rerun()
-        st.markdown("</div>", unsafe_allow_html=True)
+    # Botón cerrar sesión flotante
+    st.markdown('<div class="cerrar-sesion-flotante">', unsafe_allow_html=True)
+    if st.button("🔒 Cerrar sesión"):
+        st.session_state.autenticado = False
+        st.rerun()
+    st.markdown('</div>', unsafe_allow_html=True)
 
     # Cuerpo
     st.markdown('<div class="portal-body">', unsafe_allow_html=True)
@@ -549,16 +573,30 @@ elif st.session_state.vista == "detalle":
     mono = monograficos[st.session_state.mono_seleccionado]
 
     # Cabecera del detalle
+    icono = mono['icono']
+    titulo = mono['titulo']
+    descripcion = mono['descripcion']
     st.markdown(f"""
-    <div class="detalle-header" data-icono="{mono['icono']}">
-        <div class="detalle-back">← Biblioteca de Monográficos</div>
-        <div class="detalle-icono-titulo">
-            <span class="detalle-icono">{mono['icono']}</span>
-            <div>
-                <div class="detalle-titulo">{mono['titulo']}</div>
+    <div class="detalle-header" data-icono="{icono}">
+        <div class="portal-header-left" style="margin-bottom:20px;">
+            <div class="portal-header-logo">
+                <img src="data:image/png;base64,{LOGO_B64}" />
+            </div>
+            <div class="portal-header-text">
+                <div class="portal-ministerio-label">Ministerio para la Transformación Digital y de la Función Pública</div>
+                <div class="portal-titulo">Biblioteca de Monográficos</div>
+                <div class="portal-subtitulo">Subdirección General de Análisis de Mercado y Evolución Tecnológica</div>
             </div>
         </div>
-        <div class="detalle-desc">{mono['descripcion']}</div>
+        <div style="border-top: 1px solid rgba(255,255,255,0.15); padding-top: 20px;">
+            <div class="detalle-icono-titulo">
+                <span class="detalle-icono">{icono}</span>
+                <div>
+                    <div class="detalle-titulo">{titulo}</div>
+                </div>
+            </div>
+            <div class="detalle-desc">{descripcion}</div>
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -580,22 +618,25 @@ elif st.session_state.vista == "detalle":
         latest_badge = '<span class="latest-badge">Última edición</span>' if es_ultima else ""
 
         tiene_url = bool(ed.get('sharepoint_url', '').strip())
+        url = ed.get('sharepoint_url', '')
 
         if tiene_url:
-            botones_html = f"""
-                <a href="{ed['sharepoint_url']}" target="_blank" class="btn-acceder">Ver documento ↗</a>
-                <a href="{ed['sharepoint_url']}&download=1" target="_blank" class="btn-descargar">⬇ Descargar</a>
-            """
+            botones_html = (
+                f'<a href="{url}" target="_blank" class="btn-acceder">Ver documento ↗</a>'
+                f'<a href="{url}&download=1" target="_blank" class="btn-descargar">⬇ Descargar</a>'
+            )
         else:
             botones_html = '<span class="badge-proximamente">🔒 Próximamente</span>'
 
+        nombre_ed = ed['nombre']
+        fecha_ed = ed['fecha']
         st.markdown(f"""
         <div class="edicion-card">
             <div class="edicion-card-left">
                 <div class="edicion-numero">0{num_real}</div>
                 <div>
-                    <div class="edicion-info-nombre">{ed['nombre']} {latest_badge}</div>
-                    <div class="edicion-info-fecha">Publicado en {ed['fecha']}</div>
+                    <div class="edicion-info-nombre">{nombre_ed} {latest_badge}</div>
+                    <div class="edicion-info-fecha">Publicado en {fecha_ed}</div>
                 </div>
             </div>
             <div>
