@@ -30,6 +30,12 @@ st.markdown("""
 .block-container { padding: 0 !important; max-width: 100% !important; }
 section.main > div { padding-left: 0 !important; padding-right: 0 !important; }
 
+/* Márgenes en contenido */
+.contenido-interior {
+    padding-left: 72px !important;
+    padding-right: 72px !important;
+}
+
 /* ── LOGIN: fondo degradado institucional ── */
 .tarjeta-login {
     background: white;
@@ -574,10 +580,10 @@ if st.session_state.vista == "catalogo":
     if st.button("🔒 Cerrar sesión"):
         st.session_state.autenticado = False
         st.rerun()
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown('</div></div>', unsafe_allow_html=True)
 
     # Cuerpo
-    st.markdown('<div class="portal-body" style="padding-left:80px">', unsafe_allow_html=True)
+    st.markdown('<div class="portal-body"><div class="contenido-interior">', unsafe_allow_html=True)
     st.markdown('<div class="seccion-titulo">Monográficos disponibles</div>', unsafe_allow_html=True)
 
     # Grid de tarjetas
@@ -607,7 +613,7 @@ if st.session_state.vista == "catalogo":
                 st.session_state.vista = "detalle"
                 st.rerun()
 
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown('</div></div>', unsafe_allow_html=True)
 
 # ────────────────────────────────────────────────────────────────
 # PORTAL — DETALLE DE MONOGRÁFICO
@@ -650,7 +656,7 @@ elif st.session_state.vista == "detalle":
             st.rerun()
 
     # Ediciones
-    st.markdown('<div class="detalle-body" style="padding-left:80px">', unsafe_allow_html=True)
+    st.markdown('<div class="detalle-body"><div class="contenido-interior">', unsafe_allow_html=True)
     st.markdown('<div class="seccion-titulo">Ediciones disponibles</div>', unsafe_allow_html=True)
 
     total = len(mono["ediciones"])
