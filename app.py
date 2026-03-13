@@ -27,33 +27,40 @@ st.markdown("""
 #MainMenu, footer, header { visibility: hidden; }
 .block-container { padding: 0 !important; max-width: 100% !important; }
 
+/* Forzar fondo de toda la app en login */
+.stApp { background: #0d1b2a !important; }
+
 /* ── LOGIN ── */
 .login-wrapper {
     min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    background: #0d1b2a;
+    background: transparent;
     position: relative;
     overflow: hidden;
 }
 
 .login-wrapper::before {
     content: '';
-    position: absolute;
+    position: fixed;
     width: 600px; height: 600px;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(0,90,160,0.3) 0%, transparent 70%);
     top: -100px; left: -100px;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .login-wrapper::after {
     content: '';
-    position: absolute;
+    position: fixed;
     width: 400px; height: 400px;
     border-radius: 50%;
     background: radial-gradient(circle, rgba(0,160,120,0.2) 0%, transparent 70%);
     bottom: -50px; right: -50px;
+    pointer-events: none;
+    z-index: 0;
 }
 
 .login-card {
@@ -385,6 +392,18 @@ st.markdown("""
     text-decoration: none;
 }
 
+.badge-proximamente {
+    display: inline-block;
+    background: #f4f1ec;
+    border: 1px dashed #ccc;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #aaa;
+    letter-spacing: 0.5px;
+}
+
 /* Streamlit input override */
 div[data-testid="stTextInput"] input {
     background: rgba(255,255,255,0.07) !important;
@@ -455,6 +474,15 @@ if "mono_seleccionado" not in st.session_state:
 # PANTALLA DE LOGIN
 # ────────────────────────────────────────────────────────────────
 if not st.session_state.autenticado:
+    # Fondo oscuro para toda la app durante el login
+    st.markdown("""
+    <style>
+    .stApp { background: #0d1b2a !important; }
+    .stAppViewContainer { background: #0d1b2a !important; }
+    section[data-testid="stAppViewContainer"] { background: #0d1b2a !important; }
+    </style>
+    """, unsafe_allow_html=True)
+
     st.markdown('<div class="login-wrapper">', unsafe_allow_html=True)
 
     col_l, col_c, col_r = st.columns([1, 1.2, 1])
@@ -577,6 +605,16 @@ elif st.session_state.vista == "detalle":
 
         latest_badge = '<span class="latest-badge">Última edición</span>' if es_ultima else ""
 
+        tiene_url = bool(ed.get('sharepoint_url', '').strip())
+
+        if tiene_url:
+            botones_html = f"""
+                <a href="{ed['sharepoint_url']}" target="_blank" class="btn-acceder">Ver documento ↗</a>
+                <a href="{ed['sharepoint_url']}&download=1" target="_blank" class="btn-descargar">⬇ Descargar</a>
+            """
+        else:
+            botones_html = '<span class="badge-proximamente">🔒 Próximamente</span>'
+
         st.markdown(f"""
         <div class="edicion-card">
             <div class="edicion-card-left">
@@ -587,8 +625,7 @@ elif st.session_state.vista == "detalle":
                 </div>
             </div>
             <div>
-                <a href="{ed['sharepoint_url']}" target="_blank" class="btn-acceder">Ver documento ↗</a>
-                <a href="{ed['sharepoint_url']}&download=1" target="_blank" class="btn-descargar">⬇ Descargar</a>
+                {botones_html}
             </div>
         </div>
         """, unsafe_allow_html=True)
