@@ -448,8 +448,8 @@ div[data-testid="stButton"] button:hover {
     bottom: 0;
     left: 0;
     right: 0;
-    background: white;
-    border-top: 1px solid #e0e0e0;
+    background: #003366;
+    border-top: 2px solid #F2C811;
     padding: 8px 32px;
     display: flex;
     align-items: center;
@@ -468,13 +468,13 @@ div[data-testid="stButton"] button:hover {
 .footer-sep {
     width: 1px;
     height: 36px;
-    background: #ccc;
+    background: rgba(255,255,255,0.2);
     flex-shrink: 0;
 }
 
 .footer-texto {
     font-size: 9px;
-    color: #444;
+    color: rgba(255,255,255,0.7);
     line-height: 1.3;
     font-family: 'Inter', sans-serif;
     text-transform: uppercase;
@@ -484,24 +484,24 @@ div[data-testid="stButton"] button:hover {
 .footer-texto strong {
     display: block;
     font-size: 10px;
-    color: #003366;
+    color: #ffffff;
 }
 
 .footer-estrella {
-    color: #003399;
+    color: #F2C811;
     font-size: 18px;
     letter-spacing: -2px;
 }
 
 .footer-eu-text {
     font-size: 9px;
-    color: #333;
+    color: rgba(255,255,255,0.8);
     line-height: 1.4;
 }
 
 .footer-eu-text strong {
     font-size: 10px;
-    color: #003399;
+    color: #ffffff;
     display: block;
 }
 
@@ -557,10 +557,12 @@ div[data-testid="stAlert"] {
 FOOTER_HTML = """
 <div class="footer-institucional">
     <div class="footer-bloque">
-        <span style="font-size:20px">🇪🇸</span>
+        <img src="https://www.lamoncloa.gob.es/Documents/agenda2030/logo-agenda2030.png"
+             onerror="this.style.display='none'"
+             style="height:32px;" />
         <div>
             <div class="footer-texto"><strong>Gobierno de España</strong></div>
-            <div class="footer-texto" style="font-size:8px;color:#888">Agenda 2030</div>
+            <div class="footer-texto" style="font-size:8px;color:rgba(255,255,255,0.5)">Agenda 2030</div>
         </div>
     </div>
     <div class="footer-sep"></div>
