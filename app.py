@@ -268,7 +268,7 @@ section.main > div { padding-left: 0 !important; padding-right: 0 !important; }
     border-radius: 16px;
     padding: 20px 32px;
     border: 1px solid #e8e4df;
-    margin-bottom: 0px;
+    margin-bottom: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
