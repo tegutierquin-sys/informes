@@ -213,7 +213,7 @@ div[data-testid="stVerticalBlock"] > div:first-child .stMarkdown { margin-top: 0
 /* ── DETALLE MONOGRÁFICO ── */
 .detalle-header {
     background: linear-gradient(160deg, #003366 0%, #005A9C 60%, #F2C811 100%);
-    padding: 28px 48px;
+    padding: 16px 48px;
     position: relative;
     overflow: hidden;
     border-bottom: 3px solid #F2C811;
@@ -244,23 +244,23 @@ div[data-testid="stVerticalBlock"] > div:first-child .stMarkdown { margin-top: 0
 }
 
 .detalle-icono {
-    font-size: 52px;
+    font-size: 36px;
 }
 
 .detalle-titulo {
     font-family: 'Syne', sans-serif;
-    font-size: 32px;
+    font-size: 24px;
     font-weight: 800;
     color: white;
 }
 
 .detalle-desc {
-    font-size: 14px;
+    font-size: 12px;
     color: rgba(255,255,255,0.5);
-    margin-top: 12px;
+    margin-top: 6px;
     font-weight: 300;
     max-width: 600px;
-    line-height: 1.7;
+    line-height: 1.5;
 }
 
 .detalle-body {
@@ -448,8 +448,8 @@ div[data-testid="stButton"] button:hover {
 
 /* Botón cerrar sesión flotante */
 .nota-confidencial-inline {
-    font-size: 10px;
-    color: #aaa;
+    font-size: 12px;
+    color: #888;
     margin-top: -8px;
     margin-bottom: 8px;
     padding-left: 4px;
@@ -551,7 +551,7 @@ st.markdown(f"""
         </div>
     </div>
     <div style="background:white;border-radius:8px;padding:6px 12px;display:flex;align-items:center;flex-shrink:0;">
-        <img src="data:image/png;base64,{LOGOS_EU_B64}" style="height:44px;width:auto;object-fit:contain;" />
+        <img src="data:image/png;base64,{LOGOS_EU_B64}" style="height:60px;width:auto;object-fit:contain;" />
     </div>
 </div>
 """, unsafe_allow_html=True)
