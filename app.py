@@ -446,21 +446,121 @@ div[data-testid="stButton"] button:hover {
     background: #004080 !important;
 }
 
+/* ── TAB EQUIPO ── */
+.tab-equipo {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9998;
+}
+
+.btn-equipo {
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.55) !important;
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 6px 14px;
+    font-size: 10px;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-equipo:hover {
+    background: rgba(255,255,255,0.15);
+    color: white !important;
+}
+
+.equipo-panel {
+    background: white;
+    border-radius: 16px;
+    padding: 40px 48px;
+    max-width: 600px;
+    margin: 40px auto;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.08);
+    border: 1px solid #e8e4df;
+}
+
+.equipo-titulo {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: #003366;
+    margin-bottom: 8px;
+}
+
+.equipo-subtitulo {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 32px;
+    font-weight: 300;
+}
+
+.equipo-miembro {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid #f0ede8;
+}
+
+.equipo-miembro:last-child { border-bottom: none; }
+
+.equipo-avatar {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #003366, #005A9C);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    flex-shrink: 0;
+    color: white;
+    font-family: 'Syne', sans-serif;
+    font-weight: 700;
+}
+
+.equipo-nombre {
+    font-family: 'Syne', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #0d1b2a;
+}
+
+.equipo-rol {
+    font-size: 12px;
+    color: #999;
+    font-weight: 300;
+}
+
 /* Botón cerrar sesión flotante */
 .cerrar-sesion-flotante {
     position: fixed;
-    top: 16px;
-    right: 24px;
+    top: 12px;
+    right: 20px;
     z-index: 9999;
+    text-align: right;
+}
+
+.nota-confidencial {
+    font-size: 9px;
+    color: rgba(255,255,255,0.45);
+    margin-top: 4px;
+    max-width: 200px;
+    line-height: 1.3;
+    text-align: right;
 }
 
 .btn-cerrar {
     background: rgba(255,255,255,0.15);
     color: white !important;
     border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 8px;
-    padding: 8px 16px;
-    font-size: 12px;
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-size: 11px;
     font-weight: 600;
     cursor: pointer;
     text-decoration: none;
@@ -558,6 +658,13 @@ if not st.session_state.autenticado:
     st.markdown('<p class="login-pie">S.G. de Análisis del Mercado y Evolución Tecnológica</p>', unsafe_allow_html=True)
     st.stop()
 
+# ── Botón flotante "Conoce el equipo" (siempre visible tras login) ──
+st.markdown('<div class="tab-equipo">', unsafe_allow_html=True)
+if st.button("👥 Conoce el equipo", key="btn_equipo"):
+    st.session_state.vista = "equipo"
+    st.rerun()
+st.markdown('</div>', unsafe_allow_html=True)
+
 # ────────────────────────────────────────────────────────────────
 # PORTAL — CATÁLOGO
 # ────────────────────────────────────────────────────────────────
@@ -604,6 +711,72 @@ if st.session_state.vista == "catalogo":
     if st.button("🔒 Cerrar sesión"):
         st.session_state.autenticado = False
         st.rerun()
+    st.markdown('</div></div>', unsafe_allow_html=True)
+
+# ────────────────────────────────────────────────────────────────
+# PORTAL — EQUIPO
+# ────────────────────────────────────────────────────────────────
+elif st.session_state.vista == "equipo":
+    # Misma cabecera institucional
+    st.markdown(f"""
+    <div class="portal-header">
+        <div class="portal-header-left">
+            <div class="portal-header-logo">
+                <img src="data:image/png;base64,{LOGO_B64}" />
+            </div>
+            <div class="portal-header-text">
+                <div class="portal-ministerio-label">Ministerio para la Transformación Digital y de la Función Pública</div>
+                <div class="portal-titulo">Biblioteca de Monográficos</div>
+                <div class="portal-subtitulo">Subdirección General de Análisis de Mercado y Evolución Tecnológica</div>
+            </div>
+        </div>
+        <div style="display:flex;align-items:center;flex-shrink:0;">
+            <img src="data:image/png;base64,{LOGOS_EU_B64}" style="height:48px;width:auto;object-fit:contain;" />
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+    col_b, _ = st.columns([1, 5])
+    with col_b:
+        if st.button("← Volver al catálogo", key="back_equipo"):
+            st.session_state.vista = "catalogo"
+            st.rerun()
+
+    st.markdown('<div class="detalle-body"><div class="contenido-interior">', unsafe_allow_html=True)
+    st.markdown("""
+    <div class="equipo-panel">
+        <div class="equipo-titulo">Conoce el equipo</div>
+        <div class="equipo-subtitulo">Subdirección General de Análisis de Mercado y Evolución Tecnológica · SGAMET</div>
+        <div class="equipo-miembro">
+            <div class="equipo-avatar">F</div>
+            <div>
+                <div class="equipo-nombre">Fernando</div>
+                <div class="equipo-rol">Análisis de mercado · Telecomunicaciones</div>
+            </div>
+        </div>
+        <div class="equipo-miembro">
+            <div class="equipo-avatar">T</div>
+            <div>
+                <div class="equipo-nombre">Tessy</div>
+                <div class="equipo-rol">Análisis de mercado · Evolución tecnológica</div>
+            </div>
+        </div>
+        <div class="equipo-miembro">
+            <div class="equipo-avatar">Fr</div>
+            <div>
+                <div class="equipo-nombre">Fran</div>
+                <div class="equipo-rol">Análisis de mercado · Telecomunicaciones</div>
+            </div>
+        </div>
+        <div class="equipo-miembro">
+            <div class="equipo-avatar">P</div>
+            <div>
+                <div class="equipo-nombre">Pilar</div>
+                <div class="equipo-rol">Secretaría · Administración</div>
+            </div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
     st.markdown('</div></div>', unsafe_allow_html=True)
 
     # Cuerpo
