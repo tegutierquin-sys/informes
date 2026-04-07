@@ -300,13 +300,13 @@ div[data-testid="stVerticalBlock"] > div:first-child .stMarkdown { margin-top: 0
 
 .edicion-info-nombre {
     font-family: 'Syne', sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: 700;
     color: #0d1b2a;
 }
 
 .edicion-info-fecha {
-    font-size: 12px;
+    font-size: 14px;
     color: #aaa;
     margin-top: 2px;
 }
@@ -730,8 +730,8 @@ elif st.session_state.vista == "equipo":
                 <div class="portal-subtitulo">Subdirección General de Análisis de Mercado y Evolución Tecnológica</div>
             </div>
         </div>
-        <div style="display:flex;align-items:center;flex-shrink:0;">
-            <img src="data:image/png;base64,{LOGOS_EU_B64}" style="height:48px;width:auto;object-fit:contain;" />
+        <div style="background:white;border-radius:8px;padding:6px 12px;display:flex;align-items:center;flex-shrink:0;">
+            <img src="data:image/png;base64,{LOGOS_EU_B64}" style="height:44px;width:auto;object-fit:contain;" />
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -747,34 +747,7 @@ elif st.session_state.vista == "equipo":
     <div class="equipo-panel">
         <div class="equipo-titulo">Conoce el equipo</div>
         <div class="equipo-subtitulo">Subdirección General de Análisis de Mercado y Evolución Tecnológica · SGAMET</div>
-        <div class="equipo-miembro">
-            <div class="equipo-avatar">F</div>
-            <div>
-                <div class="equipo-nombre">Fernando</div>
-                <div class="equipo-rol">Análisis de mercado · Telecomunicaciones</div>
-            </div>
-        </div>
-        <div class="equipo-miembro">
-            <div class="equipo-avatar">T</div>
-            <div>
-                <div class="equipo-nombre">Tessy</div>
-                <div class="equipo-rol">Análisis de mercado · Evolución tecnológica</div>
-            </div>
-        </div>
-        <div class="equipo-miembro">
-            <div class="equipo-avatar">Fr</div>
-            <div>
-                <div class="equipo-nombre">Fran</div>
-                <div class="equipo-rol">Análisis de mercado · Telecomunicaciones</div>
-            </div>
-        </div>
-        <div class="equipo-miembro">
-            <div class="equipo-avatar">P</div>
-            <div>
-                <div class="equipo-nombre">Pilar</div>
-                <div class="equipo-rol">Secretaría · Administración</div>
-            </div>
-        </div>
+        <div style="color:#bbb;font-size:13px;margin-top:24px;font-style:italic;">Próximamente</div>
     </div>
     """, unsafe_allow_html=True)
     st.markdown('</div></div>', unsafe_allow_html=True)
