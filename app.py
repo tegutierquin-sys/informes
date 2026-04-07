@@ -100,13 +100,13 @@ section.main > div { padding-left: 0 !important; padding-right: 0 !important; }
 
 .portal-titulo {
     font-family: 'Syne', sans-serif;
-    font-size: 18px;
+    font-size: 24px;
     font-weight: 700;
     color: #ffffff;
 }
 
 .portal-subtitulo {
-    font-size: 11px;
+    font-size: 13px;
     color: rgba(255,255,255,0.6);
     font-weight: 300;
     margin-top: 1px;
@@ -119,11 +119,11 @@ section.main > div { padding-left: 0 !important; padding-right: 0 !important; }
 
 .seccion-titulo {
     font-family: 'Syne', sans-serif;
-    font-size: 13px;
+    font-size: 16px;
     font-weight: 600;
     letter-spacing: 2px;
     text-transform: uppercase;
-    color: #666;
+    color: #444;
     margin-bottom: 24px;
     padding-bottom: 12px;
     border-bottom: 1px solid #ddd;
@@ -570,6 +570,20 @@ if st.session_state.vista == "catalogo":
                 <div class="portal-ministerio-label">Ministerio para la Transformación Digital y de la Función Pública</div>
                 <div class="portal-titulo">Biblioteca de Monográficos</div>
                 <div class="portal-subtitulo">Subdirección General de Análisis de Mercado y Evolución Tecnológica</div>
+            </div>
+        </div>
+        <div style="display:flex;align-items:center;gap:16px;flex-shrink:0;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Flag_of_Europe.svg/80px-Flag_of_Europe.svg.png"
+                 style="height:36px;" title="Financiado por la Unión Europea · NextGenerationEU" />
+            <div style="font-size:9px;color:rgba(255,255,255,0.8);line-height:1.4;">
+                <strong style="color:white;font-size:10px;">Financiado por la Unión Europea</strong><br>NextGenerationEU
+            </div>
+            <div style="width:1px;height:36px;background:rgba(255,255,255,0.2);"></div>
+            <img src="https://www.lamoncloa.gob.es/Documents/planderecuperacion/logo-plan-recuperacion.png"
+                 onerror="this.style.display='none'"
+                 style="height:36px;" title="Plan de Recuperación, Transformación y Resiliencia" />
+            <div style="font-size:9px;color:rgba(255,255,255,0.8);line-height:1.4;max-width:120px;">
+                <strong style="color:#F2C811;font-size:10px;">Plan de Recuperación</strong><br>Transformación y Resiliencia
             </div>
         </div>
     </div>
