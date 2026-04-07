@@ -551,7 +551,7 @@ st.markdown(f"""
         </div>
     </div>
     <div style="background:white;border-radius:8px;padding:6px 12px;display:flex;align-items:center;flex-shrink:0;">
-        <img src="data:image/png;base64,{LOGOS_EU_B64}" style="height:60px;width:auto;object-fit:contain;" />
+        <img src="data:image/png;base64,{LOGOS_EU_B64}" style="height:80px;width:auto;object-fit:contain;" />
     </div>
 </div>
 """, unsafe_allow_html=True)
