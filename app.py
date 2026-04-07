@@ -508,6 +508,93 @@ if "vista" not in st.session_state:
 if "mono_seleccionado" not in st.session_state:
     st.session_state.mono_seleccionado = None
 
+# ────────────────────────────────────────────────────────────────
+# PANTALLA DE LOGIN
+# ────────────────────────────────────────────────────────────────
+if not st.session_state.autenticado:
+    st.markdown("""
+    <style>
+    .stApp { background: linear-gradient(160deg, #003366 0%, #005A9C 60%, #F2C811 100%) !important; }
+    header[data-testid="stHeader"] { background: transparent; }
+    .stButton > button {
+        background-color: #003366 !important; color: white !important;
+        border: none !important; border-radius: 6px !important;
+        font-weight: 600 !important; padding: 10px !important; width: 100%;
+    }
+    .stButton > button:hover { background-color: #005A9C !important; }
+    div[data-testid="stTextInput"] input {
+        padding: 6px 12px !important;
+        font-size: 13px !important;
+        height: 36px !important;
+        min-height: 36px !important;
+    }
+    div[data-baseweb="input"] { min-height: 36px !important; height: 36px !important; }
+    div[data-baseweb="base-input"] { min-height: 36px !important; height: 36px !important; }
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown(f"""
+        <div class="tarjeta-login">
+            <div class="logo-container">
+                <img src="data:image/png;base64,{LOGO_B64}" width="320" />
+            </div>
+            <hr class="separador-amarillo"/>
+            <p class="login-titulo-inst">Biblioteca de Monográficos</p>
+            <p class="login-subtitulo-inst">Subdirección General de Análisis de Mercado y Evolución Tecnológica</p>
+            <p class="login-label">Introduce la clave para acceder</p>
+        </div>
+    """, unsafe_allow_html=True)
+
+    col1, col2, col3 = st.columns([1.5, 1, 1.5])
+    with col2:
+        clave = st.text_input("Clave", type="password",
+                              label_visibility="collapsed",
+                              placeholder="Contraseña...")
+        if st.button("Entrar", use_container_width=True):
+            clave_correcta = st.secrets.get("ACCESS_PASSWORD", "demo1234")
+            if clave == clave_correcta:
+                st.session_state.autenticado = True
+                st.rerun()
+            else:
+                st.error("Clave incorrecta. Contacta con tu equipo.")
+
+    st.markdown('<p class="login-pie">S.G. de Análisis del Mercado y Evolución Tecnológica</p>', unsafe_allow_html=True)
+    st.stop()
+
+# ────────────────────────────────────────────────────────────────
+# PORTAL — CABECERA + CERRAR SESIÓN (común a todas las vistas)
+# ────────────────────────────────────────────────────────────────
+st.markdown(f"""
+<div class="portal-header">
+    <div class="portal-header-left">
+        <div class="portal-header-logo">
+            <img src="data:image/png;base64,{LOGO_B64}" />
+        </div>
+        <div class="portal-header-text">
+            <div class="portal-ministerio-label">Ministerio para la Transformación Digital y de la Función Pública</div>
+            <div class="portal-titulo">Biblioteca de Monográficos</div>
+            <div class="portal-subtitulo">Subdirección General de Análisis de Mercado y Evolución Tecnológica</div>
+        </div>
+    </div>
+    <div style="background:white;border-radius:8px;padding:6px 12px;display:flex;align-items:center;flex-shrink:0;">
+        <img src="data:image/png;base64,{LOGOS_EU_B64}" style="height:44px;width:auto;object-fit:contain;" />
+    </div>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown('<div class="cerrar-sesion-flotante">', unsafe_allow_html=True)
+if st.button("🔒 Cerrar sesión"):
+    st.session_state.autenticado = False
+    st.rerun()
+st.markdown('''<div class="nota-confidencial">
+    🔐 Uso interno. Antes de compartir, consulta con el equipo SGAMET.
+</div>''', unsafe_allow_html=True)
+st.markdown('</div>', unsafe_allow_html=True)
+
+# ────────────────────────────────────────────────────────────────
+# PORTAL — CATÁLOGO
+# ────────────────────────────────────────────────────────────────
+if st.session_state.vista == "catalogo":
     # Cuerpo
     st.markdown('<div class="portal-body"><div class="contenido-interior">', unsafe_allow_html=True)
     st.markdown('<div class="seccion-titulo">Monográficos disponibles</div>', unsafe_allow_html=True)
