@@ -447,39 +447,13 @@ div[data-testid="stButton"] button:hover {
 }
 
 /* Botón cerrar sesión flotante */
-.cerrar-sesion-flotante {
-    position: fixed;
-    top: 12px;
-    right: 20px;
-    z-index: 9999;
-    text-align: right;
-}
-
-.nota-confidencial {
-    font-size: 9px;
-    color: rgba(255,255,255,0.45);
-    margin-top: 4px;
-    max-width: 200px;
-    line-height: 1.3;
-    text-align: right;
-}
-
-.btn-cerrar {
-    background: rgba(255,255,255,0.15);
-    color: white !important;
-    border: 1px solid rgba(255,255,255,0.3);
-    border-radius: 6px;
-    padding: 5px 12px;
-    font-size: 11px;
-    font-weight: 600;
-    cursor: pointer;
-    text-decoration: none;
-    backdrop-filter: blur(10px);
-    letter-spacing: 0.5px;
-}
-
-.btn-cerrar:hover {
-    background: rgba(255,255,255,0.25);
+.nota-confidencial-inline {
+    font-size: 10px;
+    color: #aaa;
+    margin-top: -8px;
+    margin-bottom: 8px;
+    padding-left: 4px;
+    font-style: italic;
 }
 
 div[data-testid="stAlert"] {
@@ -582,14 +556,15 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown('<div class="cerrar-sesion-flotante">', unsafe_allow_html=True)
-if st.button("🔒 Cerrar sesión"):
-    st.session_state.autenticado = False
-    st.rerun()
-st.markdown('''<div class="nota-confidencial">
-    🔐 Uso interno. Antes de compartir, consulta con el equipo SGAMET.
+# Cerrar sesión flotante via CSS position:fixed
+col_cerrar, _ = st.columns([1, 8])
+with col_cerrar:
+    if st.button("🔒 Cerrar sesión", key="cerrar"):
+        st.session_state.autenticado = False
+        st.rerun()
+st.markdown('''<div class="nota-confidencial-inline">
+    🔐 Uso interno · Consulta con SGAMET antes de compartir
 </div>''', unsafe_allow_html=True)
-st.markdown('</div>', unsafe_allow_html=True)
 
 # ────────────────────────────────────────────────────────────────
 # PORTAL — CATÁLOGO
@@ -634,31 +609,19 @@ if st.session_state.vista == "catalogo":
 elif st.session_state.vista == "detalle":
     mono = monograficos[st.session_state.mono_seleccionado]
 
-    # Cabecera del detalle
+    # Cabecera del detalle (solo icono + título, sin logo duplicado)
     icono = mono['icono']
     titulo = mono['titulo']
     descripcion = mono['descripcion']
     st.markdown(f"""
-    <div class="detalle-header" data-icono="{icono}">
-        <div class="portal-header-left" style="margin-bottom:20px;">
-            <div class="portal-header-logo">
-                <img src="data:image/png;base64,{LOGO_B64}" />
-            </div>
-            <div class="portal-header-text">
-                <div class="portal-ministerio-label">Ministerio para la Transformación Digital y de la Función Pública</div>
-                <div class="portal-titulo">Biblioteca de Monográficos</div>
-                <div class="portal-subtitulo">Subdirección General de Análisis de Mercado y Evolución Tecnológica</div>
+    <div class="detalle-header">
+        <div class="detalle-icono-titulo">
+            <span class="detalle-icono">{icono}</span>
+            <div>
+                <div class="detalle-titulo">{titulo}</div>
             </div>
         </div>
-        <div style="border-top: 1px solid rgba(255,255,255,0.15); padding-top: 20px;">
-            <div class="detalle-icono-titulo">
-                <span class="detalle-icono">{icono}</span>
-                <div>
-                    <div class="detalle-titulo">{titulo}</div>
-                </div>
-            </div>
-            <div class="detalle-desc">{descripcion}</div>
-        </div>
+        <div class="detalle-desc">{descripcion}</div>
     </div>
     """, unsafe_allow_html=True)
 
